@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>tinta · demos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:'Melodrama';
+  src:url('fonts/melodrama-regular.woff') format('woff'),
+      url('fonts/melodrama-regular.otf') format('opentype');
+  font-weight:400;font-style:normal;font-display:block;
+}
+:root{
+  --bg:#13110E;
+  --text:rgba(245,241,233,0.95);
+  --muted:rgba(245,241,233,0.50);
+  --faint:rgba(245,241,233,0.30);
+  --line:rgba(245,241,233,0.11);
+  --brand:#C49A37;
+  --serif:'Melodrama',Georgia,serif;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  background:
+    radial-gradient(1100px 720px at 82% 50%, rgba(196,154,55,0.13), transparent 60%),
+    radial-gradient(900px 700px at 0% 120%, rgba(245,241,233,0.04), transparent 60%),
+    var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  overflow:hidden;
+  display:grid;place-items:center;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- scalable 16:9 stage ---------- */
+.deck{
+  width:1280px;height:720px;position:fixed;left:50%;top:50%;
+  transform-origin:center center;
+  border-radius:18px;overflow:hidden;
+  box-shadow:0 40px 120px -30px rgba(0,0,0,0.85), 0 0 0 1px rgba(245,241,233,0.05);
+  background:linear-gradient(160deg,#191510 0%,#13110E 60%,#100e0b 100%);
+}
+.slide{position:absolute;inset:0;display:none}
+.slide.active{display:block;animation:fade .5s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ---------- brand mark ---------- */
+.brandbar{position:absolute;top:38px;left:64px;display:flex;align-items:center;gap:11px;z-index:6}
+.brandbar .mark{display:block;border-radius:9px}
+.brandbar .name{font-family:var(--serif);font-size:24px;font-weight:400;letter-spacing:.01em;line-height:1}
+
+/* ---------- caption (title) ---------- */
+.cap{position:absolute;left:64px;top:0;height:100%;display:flex;flex-direction:column;justify-content:center;gap:20px;max-width:470px;z-index:5}
+.cap .kick{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--brand);display:flex;align-items:center;gap:12px}
+.cap .kick::before{content:"";width:26px;height:2px;background:var(--brand);border-radius:2px}
+.cap .ttl{font-family:var(--serif);font-weight:400;font-size:62px;line-height:1.04;letter-spacing:-.005em}
+.cap .sub{font-size:16.5px;line-height:1.55;color:var(--muted);max-width:38ch;margin-top:4px}
+.cap .rlist{display:flex;flex-direction:column;gap:9px;margin-top:18px}
+.cap .rlist div{font-size:14.5px;line-height:1.45;color:var(--muted);padding-left:17px;position:relative;max-width:34ch}
+.cap .rlist div::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--brand)}
+.sidecard{position:absolute;top:50%;left:474px;width:296px;transform:translateY(-50%);z-index:5;
+  background:linear-gradient(160deg,rgba(196,154,55,.13),rgba(196,154,55,.02));border:1px solid rgba(196,154,55,.28);
+  border-radius:16px;padding:22px 22px 24px}
+.sidecard .lab{font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--brand);
+  margin-bottom:13px;display:flex;align-items:center;gap:9px}
+.sidecard p{font-size:14.5px;line-height:1.5;color:var(--text)}
+.sidecard p b{color:var(--brand);font-weight:600}
+
+/* ---------- confidential watermark ---------- */
+.wm{position:absolute;bottom:24px;right:34px;display:flex;align-items:center;gap:8px;opacity:.55;z-index:6}
+.wm .d{width:8px;height:8px;border-radius:50%;background:var(--brand)}
+.wm span{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);font-weight:700}
+
+/* ---------- phone stage ---------- */
+.stage{position:absolute;right:128px;top:0;height:100%;display:flex;align-items:center;z-index:4}
+
+/* ---------- iPhone 15 frame ---------- */
+.phone{
+  position:relative;width:312px;height:642px;flex:none;
+  border-radius:54px;padding:10px;
+  background:linear-gradient(145deg,#4a4a4f 0%,#1c1c1f 20%,#1a1a1d 80%,#48484d 100%);
+  box-shadow:
+    0 0 0 1.5px #050506,
+    0 36px 80px -24px rgba(0,0,0,0.9),
+    0 0 130px -26px rgba(196,154,55,0.34);
+}
+.phone::after{
+  content:"";position:absolute;inset:0;border-radius:54px;pointer-events:none;
+  box-shadow:inset 0 2px 1px rgba(255,255,255,0.22), inset 0 -2px 1px rgba(255,255,255,0.05);
+}
+.phone .screen{position:relative;width:100%;height:100%;border-radius:44px;overflow:hidden;background:#000}
+.phone .screen video{width:100%;height:100%;object-fit:cover;display:block}
+/* mask the recorded iOS status bar (time + red recording dot) */
+.phone .statuscover{position:absolute;top:0;left:0;right:0;height:6.6%;background:#000;z-index:2}
+.phone .island{
+  position:absolute;top:11px;left:50%;transform:translateX(-50%);
+  width:88px;height:26px;border-radius:13px;z-index:3;
+  background:radial-gradient(120% 130% at 50% 18%, #1c1c1e, #000 72%);
+  box-shadow:0 0 0 1px rgba(245,241,233,0.07), inset 0 1px 1px rgba(245,241,233,0.05);
+}
+.phone .btn{position:absolute;background:linear-gradient(#3c3c40,#1f1f22);z-index:1}
+.phone .btn.pwr{right:-2.5px;top:188px;width:2.5px;height:74px;border-radius:0 2px 2px 0}
+.phone .btn.vup{left:-2.5px;top:146px;width:2.5px;height:46px;border-radius:2px 0 0 2px}
+.phone .btn.vdn{left:-2.5px;top:204px;width:2.5px;height:46px;border-radius:2px 0 0 2px}
+
+/* ---------- chrome (viewport nav) ---------- */
+.chrome{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:50;
+  background:rgba(19,17,14,.72);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:40px;padding:8px 10px 8px 16px}
+.chrome .dots{display:flex;gap:7px}
+.chrome .dot{width:7px;height:7px;border-radius:50%;background:rgba(245,241,233,.22);cursor:pointer;transition:.25s}
+.chrome .dot.on{background:var(--brand);width:20px;border-radius:6px}
+.chrome .ct{font-family:'Inter',monospace;font-size:11px;color:var(--muted);min-width:42px;text-align:center}
+.chrome button{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:rgba(245,241,233,.04);color:var(--text);cursor:pointer;font-size:13px;display:grid;place-items:center;transition:.2s}
+.chrome button:hover{background:var(--brand);border-color:var(--brand);color:#13110E}
+.hint{position:fixed;top:16px;right:18px;font-size:11px;color:var(--faint);z-index:50;font-family:'Inter',monospace}
+.rotate-hint{display:none;position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:80;
+  background:rgba(196,154,55,.16);border:1px solid rgba(196,154,55,.42);color:var(--text);
+  font-size:12px;font-weight:600;padding:8px 15px;border-radius:20px;font-family:var(--sans)}
+@media (max-width:820px){ .hint{display:none} }
+@media (max-width:820px) and (orientation:portrait){ .rotate-hint{display:block} }
+</style>
+</head>
+<body>
+<div class="hint">← → para navegar</div>
+<div class="rotate-hint">↻ Girá el teléfono para verlo en grande</div>
+<div class="deck" id="deck">
+
+  <!-- 1 · EDITAR TÍTULO (demo-1) -->
+  <section class="slide active">
+    <div class="brandbar"><svg class="mark" width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" rx="44" fill="#13110E" stroke="#2A2C30" stroke-width="3"/><path d="M44 100 C58 62, 82 62, 95 102 C108 142, 132 142, 145 102 C151 84, 158 82, 162 92" fill="none" stroke="#F5F1E9" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/><circle cx="168" cy="96" r="16" fill="#C49A37"/></svg><span class="name">tinta</span></div>
+    <div class="cap"><div class="kick">Demo · 01 / 06</div><h1 class="ttl">Editar título</h1><p class="sub">Este medio utiliza notas de sus redes para alimentar su Instagram principalmente.</p></div>
+    <div class="stage"><div class="phone"><span class="btn vup"></span><span class="btn vdn"></span><span class="btn pwr"></span><div class="screen"><video src="videos/demo-1.mp4" muted loop playsinline preload="metadata"></video><div class="statuscover"></div><span class="island"></span></div></div></div>
+    <div class="wm"><span class="d"></span><span>tinta · Confidencial</span></div>
+  </section>
+
+  <!-- 2 · APROBAR PUBLICACIÓN (demo-2) -->
+  <section class="slide">
+    <div class="brandbar"><svg class="mark" width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" rx="44" fill="#13110E" stroke="#2A2C30" stroke-width="3"/><path d="M44 100 C58 62, 82 62, 95 102 C108 142, 132 142, 145 102 C151 84, 158 82, 162 92" fill="none" stroke="#F5F1E9" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/><circle cx="168" cy="96" r="16" fill="#C49A37"/></svg><span class="name">tinta</span></div>
+    <div class="cap"><div class="kick">Demo · 02 / 06</div><h1 class="ttl">Aprobar publicación</h1></div>
+    <div class="stage"><div class="phone"><span class="btn vup"></span><span class="btn vdn"></span><span class="btn pwr"></span><div class="screen"><video src="videos/demo-2.mp4" muted loop playsinline preload="metadata"></video><div class="statuscover"></div><span class="island"></span></div></div></div>
+    <div class="wm"><span class="d"></span><span>tinta · Confidencial</span></div>
+  </section>
+
+  <!-- 3 · CREAR A MANO (demo-4) -->
+  <section class="slide">
+    <div class="brandbar"><svg class="mark" width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" rx="44" fill="#13110E" stroke="#2A2C30" stroke-width="3"/><path d="M44 100 C58 62, 82 62, 95 102 C108 142, 132 142, 145 102 C151 84, 158 82, 162 92" fill="none" stroke="#F5F1E9" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/><circle cx="168" cy="96" r="16" fill="#C49A37"/></svg><span class="name">tinta</span></div>
+    <div class="cap"><div class="kick">Demo · 03 / 06</div><h1 class="ttl">Crear a mano</h1></div>
+    <div class="stage"><div class="phone"><span class="btn vup"></span><span class="btn vdn"></span><span class="btn pwr"></span><div class="screen"><video src="videos/demo-4.mp4" muted loop playsinline preload="metadata"></video><div class="statuscover"></div><span class="island"></span></div></div></div>
+    <div class="wm"><span class="d"></span><span>tinta · Confidencial</span></div>
+  </section>
+
+  <!-- 4 · CREAR CON LINK (demo-5) -->
+  <section class="slide">
+    <div class="brandbar"><svg class="mark" width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" rx="44" fill="#13110E" stroke="#2A2C30" stroke-width="3"/><path d="M44 100 C58 62, 82 62, 95 102 C108 142, 132 142, 145 102 C151 84, 158 82, 162 92" fill="none" stroke="#F5F1E9" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/><circle cx="168" cy="96" r="16" fill="#C49A37"/></svg><span class="name">tinta</span></div>
+    <div class="cap"><div class="kick">Demo · 04 / 06</div><h1 class="ttl">Crear con link</h1></div>
+    <div class="stage"><div class="phone"><span class="btn vup"></span><span class="btn vdn"></span><span class="btn pwr"></span><div class="screen"><video src="videos/demo-5.mp4" muted loop playsinline preload="metadata"></video><div class="statuscover"></div><span class="island"></span></div></div></div>
+    <div class="wm"><span class="d"></span><span>tinta · Confidencial</span></div>
+  </section>
+
+  <!-- 5 · BUSCAR (demo-6) -->
+  <section class="slide">
+    <div class="brandbar"><svg class="mark" width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" rx="44" fill="#13110E" stroke="#2A2C30" stroke-width="3"/><path d="M44 100 C58 62, 82 62, 95 102 C108 142, 132 142, 145 102 C151 84, 158 82, 162 92" fill="none" stroke="#F5F1E9" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/><circle cx="168" cy="96" r="16" fill="#C49A37"/></svg><span class="name">tinta</span></div>
+    <div class="cap"><div class="kick">Demo · 05 / 06</div><h1 class="ttl">Buscar</h1></div>
+    <div class="stage"><div class="phone"><span class="btn vup"></span><span class="btn vdn"></span><span class="btn pwr"></span><div class="screen"><video src="videos/demo-6.mp4" muted loop playsinline preload="metadata"></video><div class="statuscover"></div><span class="island"></span></div></div></div>
+    <div class="wm"><span class="d"></span><span>tinta · Confidencial</span></div>
+  </section>
+
+  <!-- 6 · REDACTOR (demo-redactor) -->
+  <section class="slide">
+    <div class="brandbar"><svg class="mark" width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" rx="44" fill="#13110E" stroke="#2A2C30" stroke-width="3"/><path d="M44 100 C58 62, 82 62, 95 102 C108 142, 132 142, 145 102 C151 84, 158 82, 162 92" fill="none" stroke="#F5F1E9" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/><circle cx="168" cy="96" r="16" fill="#C49A37"/></svg><span class="name">tinta</span></div>
+    <div class="cap" style="max-width:380px"><div class="kick">Demo · 06 / 06</div><h1 class="ttl">Redactor</h1><p class="sub">Elabora la nota completa en ~2–3 min: entra en contexto con las reglas que tu medio define para publicar en su portal y con el formato de escritura de cada redactor.</p><div class="rlist"><div>Desde texto plano, o sumando sitios web como fuente.</div><div>La publicás, editás foto y texto, o la subís como borrador.</div></div></div>
+    <div class="sidecard"><div class="lab"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><rect x="6.5" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17.5" y="4.5" width="3" height="13.5"/></svg>Recomendación</div><p>Un modelo estadístico te dice si <b>conviene subir la nota o no</b>, según la historia y las métricas de tu medio.</p></div>
+    <div class="stage"><div class="phone"><span class="btn vup"></span><span class="btn vdn"></span><span class="btn pwr"></span><div class="screen"><video src="videos/demo-redactor.mp4" muted loop playsinline preload="metadata"></video><div class="statuscover"></div><span class="island"></span></div></div></div>
+    <div class="wm"><span class="d"></span><span>tinta · Confidencial</span></div>
+  </section>
+
+</div>
+
+<div class="chrome">
+  <button id="prev" aria-label="Anterior">‹</button>
+  <div class="dots" id="dots"></div>
+  <div class="ct" id="ct">01 / 06</div>
+  <button id="next" aria-label="Siguiente">›</button>
+</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+const deck=document.getElementById('deck');
+const dotsWrap=document.getElementById('dots');
+const ct=document.getElementById('ct');
+let cur=0;
+slides.forEach((_,i)=>{const d=document.createElement('span');d.className='dot'+(i===0?' on':'');d.onclick=e=>{e.stopPropagation();go(i)};dotsWrap.appendChild(d)});
+const dots=[...dotsWrap.children];
+function go(i){
+  cur=Math.max(0,Math.min(i,slides.length-1));
+  slides.forEach((s,k)=>{
+    const on=k===cur;
+    s.classList.toggle('active',on);
+    s.querySelectorAll('video').forEach(v=>{
+      if(on){ try{v.currentTime=0;}catch(e){} v.play().catch(()=>{}); }
+      else { v.pause(); }
+    });
+  });
+  dots.forEach((d,k)=>d.classList.toggle('on',k===cur));
+  ct.textContent=String(cur+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
+}
+function scaleDeck(){
+  const pad=innerWidth<820?0:44;
+  const s=Math.min((innerWidth-pad)/1280,(innerHeight-pad)/720);
+  deck.style.transform='translate(-50%,-50%) scale('+s+')';
+}
+addEventListener('resize',scaleDeck);scaleDeck();
+addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' ')go(cur+1);
+  if(e.key==='ArrowLeft'||e.key==='PageUp')go(cur-1);
+  if(e.key==='Home')go(0); if(e.key==='End')go(slides.length-1);
+});
+document.getElementById('next').onclick=e=>{e.stopPropagation();go(cur+1)};
+document.getElementById('prev').onclick=e=>{e.stopPropagation();go(cur-1)};
+deck.addEventListener('click',e=>{go(cur+(e.clientX>innerWidth/2?1:-1))});
+let tx=null;
+addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+addEventListener('touchend',e=>{if(tx===null)return;const d=tx-e.changedTouches[0].clientX;if(Math.abs(d)>45)go(cur+(d>0?1:-1));tx=null},{passive:true});
+go(0);
+</script>
+</body>
+</html>

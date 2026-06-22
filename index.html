@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>tinta · NG Federal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:'Melodrama';
+  src:url('tinta-logos/fonts/melodrama-regular.woff') format('woff'),
+      url('tinta-logos/fonts/melodrama-regular.otf') format('opentype');
+  font-weight:400;font-style:normal;font-display:block;
+}
+:root{
+  --bg:#13110E;
+  --text:rgba(245,241,233,0.95);
+  --muted:rgba(245,241,233,0.56);
+  --faint:rgba(245,241,233,0.34);
+  --line:rgba(245,241,233,0.11);
+  --line-soft:rgba(245,241,233,0.06);
+  --panel:rgba(245,241,233,0.04);
+  --brand:#C49A37;
+  --brand-soft:rgba(196,154,55,0.15);
+  --serif:'Melodrama',Georgia,serif;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{min-height:100%}
+body{
+  background:
+    radial-gradient(1200px 600px at 78% -10%, rgba(196,154,55,0.12), transparent 60%),
+    radial-gradient(900px 600px at 8% 110%, rgba(245,241,233,0.045), transparent 60%),
+    var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:100vh;padding:48px 22px;
+}
+.wrap{width:100%;max-width:620px}
+.wordmark{display:flex;align-items:center;gap:13px;margin-bottom:40px}
+.wordmark .name{font-family:var(--serif);font-size:30px;font-weight:400;letter-spacing:.01em;line-height:1}
+.wordmark .name span{font-family:var(--sans);font-size:14px;color:var(--muted);font-weight:500;letter-spacing:0}
+.kicker{font-size:12.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--brand);
+  display:flex;align-items:center;gap:11px;margin-bottom:18px}
+.kicker::before{content:"";width:24px;height:2px;background:var(--brand);border-radius:2px}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;line-height:1.06;letter-spacing:-.005em;margin-bottom:16px}
+h1 em{font-style:normal;color:var(--brand)}
+.lead{font-size:17px;line-height:1.55;color:var(--muted);max-width:52ch;margin-bottom:38px}
+.cards{display:grid;gap:16px}
+a.card{
+  display:flex;align-items:center;gap:20px;text-decoration:none;color:inherit;
+  background:var(--panel);border:1px solid var(--line-soft);border-radius:16px;padding:22px 24px;
+  transition:border-color .2s, background .2s, transform .2s;
+}
+a.card:hover{border-color:rgba(196,154,55,0.34);background:rgba(196,154,55,0.06);transform:translateY(-2px)}
+a.card.lift{background:linear-gradient(160deg,rgba(196,154,55,0.12),rgba(196,154,55,0.02));border-color:rgba(196,154,55,0.24)}
+.card .ic{flex:none;width:46px;height:46px;border-radius:12px;background:var(--brand-soft);
+  display:grid;place-items:center;color:var(--brand)}
+.card .tx{flex:1;min-width:0}
+.card .tx h3{font-size:18px;font-weight:700;letter-spacing:-.005em;margin-bottom:3px}
+.card .tx p{font-size:13.5px;line-height:1.45;color:var(--muted)}
+.card .go{flex:none;color:var(--faint);font-size:20px;transition:color .2s,transform .2s}
+a.card:hover .go{color:var(--brand);transform:translateX(3px)}
+.foot{margin-top:40px;display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;
+  font-size:12.5px;color:var(--faint)}
+.foot b{color:var(--muted);font-weight:600}
+.foot .sep{width:1px;height:13px;background:var(--line)}
+.tag{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+@media(max-width:480px){
+  h1{font-size:36px}
+  a.card{padding:18px 18px;gap:15px}
+  .card .ic{width:40px;height:40px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="wordmark">
+    <svg class="mark" width="44" height="44" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" rx="44" fill="#13110E" stroke="#2A2C30" stroke-width="3"/><path d="M44 100 C58 62, 82 62, 95 102 C108 142, 132 142, 145 102 C151 84, 158 82, 162 92" fill="none" stroke="#F5F1E9" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/><circle cx="168" cy="96" r="16" fill="#C49A37"/></svg>
+    <span class="name">tinta<span> · automatización editorial</span></span>
+  </div>
+
+  <div class="kicker">Preparado para NG Federal</div>
+  <h1>Hacemos el trabajo repetitivo<br>para que tu equipo haga <em>periodismo.</em></h1>
+  <p class="lead">Dos piezas: la propuesta de servicio y el producto funcionando en el teléfono. Abrí cualquiera de las dos.</p>
+
+  <div class="cards">
+    <a class="card lift" href="pitch-norte-grande.html">
+      <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h6"/></svg></div>
+      <div class="tx"><h3>La propuesta</h3><p>Qué es, cómo funciona y cómo lo implementamos para NG Federal — 12 láminas.</p></div>
+      <div class="go">→</div>
+    </a>
+    <a class="card" href="tinta-demos/">
+      <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M12 18h.01"/></svg></div>
+      <div class="tx"><h3>El producto en vivo</h3><p>Demos reales en el teléfono: editar, aprobar, crear y el redactor.</p></div>
+      <div class="go">→</div>
+    </a>
+  </div>
+
+  <div class="foot">
+    <span class="tag">Confidencial</span><div class="sep"></div>
+    <span><b>Nahuel Giagnorio</b> · +54 9 379 481-1520</span><div class="sep"></div>
+    <span><b>Juanita Rojas Maldonado Simón</b> · +54 9 379 437-8695</span>
+  </div>
+</div>
+</body>
+</html>
